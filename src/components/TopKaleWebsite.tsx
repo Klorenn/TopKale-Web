@@ -25,6 +25,7 @@ const TopKaleWebsite: React.FC = () => {
   const textControls = useAnimation();
   const [showCommands, setShowCommands] = useState(false);
   const [language, setLanguage] = useState<'en' | 'es' | 'pt'>('en');
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const translations = {
     en: {
@@ -355,7 +356,8 @@ const TopKaleWebsite: React.FC = () => {
             />
             <span className="text-2xl font-bold text-blue-200">TopKale</span>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
+            {/* Desktop Navigation */}
             <div className="hidden md:flex gap-8 text-sm">
               <a href="#features" className="hover:text-blue-200 transition-colors">{t.nav.features}</a>
               <a href="#stats" className="hover:text-blue-200 transition-colors">{t.nav.stats}</a>
@@ -368,18 +370,53 @@ const TopKaleWebsite: React.FC = () => {
                 {t.nav.invite}
               </a>
             </div>
+            
+            {/* Language Selector */}
             <div className="flex items-center gap-2">
               <select 
                 value={language} 
                 onChange={(e) => setLanguage(e.target.value as 'en' | 'es' | 'pt')}
-                className="bg-blue-800/50 border border-blue-400 text-blue-100 rounded px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
+                className="bg-blue-800/50 border border-blue-400 text-blue-100 rounded px-2 py-1 text-xs sm:px-3 sm:py-1 sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
               >
-                <option value="en">🇺🇸 English</option>
-                <option value="es">🇪🇸 Español</option>
-                <option value="pt">🇵🇹 Português</option>
+                <option value="en">🇺🇸 EN</option>
+                <option value="es">🇪🇸 ES</option>
+                <option value="pt">🇵🇹 PT</option>
               </select>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+              className="md:hidden text-blue-200 hover:text-white transition-colors p-2"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           </div>
+
+          {/* Mobile Menu */}
+          {showMobileMenu && (
+            <div className="md:hidden absolute top-full left-0 right-0 bg-blue-900/95 backdrop-blur-sm border-t border-blue-400 p-4 z-50">
+              <div className="flex flex-col gap-4">
+                <a href="#features" className="text-blue-200 hover:text-white transition-colors" onClick={() => setShowMobileMenu(false)}>
+                  {t.nav.features}
+                </a>
+                <a href="#stats" className="text-blue-200 hover:text-white transition-colors" onClick={() => setShowMobileMenu(false)}>
+                  {t.nav.stats}
+                </a>
+                <a 
+                  href="https://discord.com/api/oauth2/authorize?client_id=1414030545083433001&permissions=2048&scope=bot%20applications.commands"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-200 hover:text-white transition-colors"
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  {t.nav.invite}
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </motion.nav>
 
@@ -401,10 +438,10 @@ const TopKaleWebsite: React.FC = () => {
                 className="w-32 h-32"
               />
             </div>
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 text-blue-100 drop-shadow-lg">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 text-blue-100 drop-shadow-lg">
               {t.hero.title}
             </h1>
-            <p className="text-xl md:text-2xl text-blue-200 mb-8 leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl text-blue-200 mb-8 leading-relaxed px-4">
               {t.hero.subtitle}
             </p>
           </motion.div>
@@ -419,13 +456,13 @@ const TopKaleWebsite: React.FC = () => {
               href="https://discord.com/api/oauth2/authorize?client_id=1414030545083433001&permissions=2048&scope=bot%20applications.commands"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-blue-500 hover:bg-blue-400 text-white font-bold rounded-lg border-4 border-blue-300 shadow-lg transform hover:scale-105 transition-all duration-200 inline-block"
+              className="px-6 py-3 sm:px-8 sm:py-4 bg-blue-500 hover:bg-blue-400 text-white font-bold rounded-lg border-4 border-blue-300 shadow-lg transform hover:scale-105 transition-all duration-200 inline-block text-sm sm:text-base w-full sm:w-auto"
             >
               {t.hero.addButton}
             </a>
             <button 
               onClick={() => setShowCommands(!showCommands)}
-              className="px-8 py-4 bg-transparent border-4 border-blue-300 text-blue-100 font-bold rounded-lg hover:bg-blue-300 hover:text-blue-800 transition-all duration-200"
+              className="px-6 py-3 sm:px-8 sm:py-4 bg-transparent border-4 border-blue-300 text-blue-100 font-bold rounded-lg hover:bg-blue-300 hover:text-blue-800 transition-all duration-200 text-sm sm:text-base w-full sm:w-auto"
             >
               {t.hero.commandsButton}
             </button>
@@ -605,7 +642,7 @@ const TopKaleWebsite: React.FC = () => {
             {t.stats.title}
           </motion.h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {t.stats.items.map((stat, index) => (
               <motion.div
                 key={index}
@@ -614,11 +651,11 @@ const TopKaleWebsite: React.FC = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <PixelCard className="p-6 text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-blue-300 mb-2">
+                <PixelCard className="p-4 sm:p-6 text-center">
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-300 mb-2">
                     {stat.value}
                   </div>
-                  <div className="text-blue-200 text-sm">
+                  <div className="text-blue-200 text-xs sm:text-sm">
                     {stat.label}
                   </div>
                 </PixelCard>
@@ -648,7 +685,7 @@ const TopKaleWebsite: React.FC = () => {
                 href="https://discord.com/api/oauth2/authorize?client_id=1414030545083433001&permissions=2048&scope=bot%20applications.commands"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-12 py-6 bg-blue-500 hover:bg-blue-400 text-white font-bold rounded-lg border-4 border-blue-300 shadow-lg transform hover:scale-105 transition-all duration-200 text-lg inline-block"
+                className="px-8 py-4 sm:px-12 sm:py-6 bg-blue-500 hover:bg-blue-400 text-white font-bold rounded-lg border-4 border-blue-300 shadow-lg transform hover:scale-105 transition-all duration-200 text-base sm:text-lg inline-block w-full sm:w-auto"
               >
                 {t.cta.button}
               </a>
@@ -673,10 +710,10 @@ const TopKaleWebsite: React.FC = () => {
           <p className="text-blue-300 text-sm mb-4">
             {t.footer.madeBy} <a href="https://x.com/kl0ren" target="_blank" rel="noopener noreferrer" className="text-blue-200 hover:text-white transition-colors underline">Pau</a> {t.footer.using} <a href="https://hoops.finance" target="_blank" rel="noopener noreferrer" className="text-blue-200 hover:text-white transition-colors underline">Hoops Finance API</a>
           </p>
-          <div className="flex justify-center gap-6 text-sm">
-            <a href="#" className="text-blue-200 hover:text-white transition-colors">Support</a>
-            <a href="#" className="text-blue-200 hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="text-blue-200 hover:text-white transition-colors">Terms</a>
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 text-sm">
+            <a href="https://discord.gg/bDakpsnCzA" target="_blank" rel="noopener noreferrer" className="text-blue-200 hover:text-white transition-colors text-center">Support</a>
+            <a href="https://github.com/Klorenn/topkale" target="_blank" rel="noopener noreferrer" className="text-blue-200 hover:text-white transition-colors text-center">Privacy</a>
+            <a href="https://github.com/Klorenn/topkale" target="_blank" rel="noopener noreferrer" className="text-blue-200 hover:text-white transition-colors text-center">Terms</a>
           </div>
         </div>
       </footer>
