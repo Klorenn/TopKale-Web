@@ -71,9 +71,9 @@ const TopKaleWebsite: React.FC = () => {
       stats: {
         title: "Stats",
         items: [
-          { label: "Active Users", value: "2,500+" },
-          { label: "Discord Servers", value: "150+" },
-          { label: "Commands Used", value: "50K+" },
+          { label: "Active Users", value: "10+" },
+          { label: "Discord Servers", value: "2+" },
+          { label: "Commands Used", value: "50+" },
           { label: "Price Updates", value: "24/7" }
         ]
       },
@@ -155,9 +155,9 @@ const TopKaleWebsite: React.FC = () => {
       stats: {
         title: "Estadísticas",
         items: [
-          { label: "Usuarios Activos", value: "2,500+" },
-          { label: "Servidores Discord", value: "150+" },
-          { label: "Comandos Usados", value: "50K+" },
+          { label: "Usuarios Activos", value: "10+" },
+          { label: "Servidores Discord", value: "2+" },
+          { label: "Comandos Usados", value: "50+" },
           { label: "Actualizaciones de Precio", value: "24/7" }
         ]
       },
@@ -239,9 +239,9 @@ const TopKaleWebsite: React.FC = () => {
       stats: {
         title: "Estatísticas",
         items: [
-          { label: "Usuários Ativos", value: "2,500+" },
-          { label: "Servidores Discord", value: "150+" },
-          { label: "Comandos Usados", value: "50K+" },
+          { label: "Usuários Ativos", value: "10+" },
+          { label: "Servidores Discord", value: "2+" },
+          { label: "Comandos Usados", value: "50+" },
           { label: "Atualizações de Preço", value: "24/7" }
         ]
       },
@@ -644,9 +644,14 @@ const TopKaleWebsite: React.FC = () => {
               <p className="text-xl text-blue-200 mb-8 leading-relaxed">
                 {t.cta.description}
               </p>
-              <button className="px-12 py-6 bg-blue-500 hover:bg-blue-400 text-white font-bold rounded-lg border-4 border-blue-300 shadow-lg transform hover:scale-105 transition-all duration-200 text-lg">
+              <a 
+                href="https://discord.com/api/oauth2/authorize?client_id=1414030545083433001&permissions=2048&scope=bot%20applications.commands"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-12 py-6 bg-blue-500 hover:bg-blue-400 text-white font-bold rounded-lg border-4 border-blue-300 shadow-lg transform hover:scale-105 transition-all duration-200 text-lg inline-block"
+              >
                 {t.cta.button}
-              </button>
+              </a>
             </PixelCard>
           </motion.div>
         </div>
